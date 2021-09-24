@@ -15,7 +15,7 @@ public class Account {
     private int age;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Order> order = new ArrayList<>();
+    private List<Orders> orders = new ArrayList<>();
 
     public Account() {
     }
@@ -47,13 +47,13 @@ public class Account {
         return age;
     }
 
-    public List<Order> getOrder() {
-        return order;
+    public List<Orders> getOrder() {
+        return orders;
     }
 
-    public Account addOrder(Order order) {
-        this.order.add(order);
-        order.byUser(this);
+    public Account addOrder(Orders orders) {
+        this.orders.add(orders);
+        orders.byUser(this);
         return this;
     }
 
@@ -64,7 +64,7 @@ public class Account {
                 ", accountName='" + accountName + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", order=" + order +
+                ", order=" + orders +
                 '}';
     }
 }

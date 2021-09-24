@@ -3,13 +3,12 @@ package com.example.springdatajpatest.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders")
-public class Order {
+public class Orders {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String product;
+    private String productName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -19,24 +18,24 @@ public class Order {
     @JoinColumn(name = "price_ID")
     private Price price;
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order(String product) {
+    public Orders(String product) {
         this(null, product);
     }
 
-    public Order(Long id, String product) {
+    public Orders(Long id, String productName) {
         this.id = id;
-        this.product = product;
+        this.productName = productName;
     }
 
-    public Order byUser(Account user) {
+    public Orders byUser(Account user) {
         this.user = user;
         return this;
     }
 
-    public Order setPrice(Price price) {
+    public Orders setPrice(Price price) {
         this.price = price;
         return this;
     }
@@ -45,8 +44,8 @@ public class Order {
         return id;
     }
 
-    public String getProduct() {
-        return product;
+    public String getProductName() {
+        return productName;
     }
 
     public Account getUser() {
@@ -61,7 +60,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", product='" + product + '\'' +
+                ", productName='" + productName + '\'' +
                 ", user=" + user.getAccountName() +
                 '}';
     }

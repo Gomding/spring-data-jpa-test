@@ -1,9 +1,9 @@
 package com.example.springdatajpatest;
 
 import com.example.springdatajpatest.domain.Account;
-import com.example.springdatajpatest.domain.Order;
+import com.example.springdatajpatest.domain.Orders;
 import com.example.springdatajpatest.domain.repository.AccountRepository;
-import com.example.springdatajpatest.domain.repository.OrderRepository;
+import com.example.springdatajpatest.domain.repository.OrdersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class TestJpa {
     private AccountRepository accountRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrdersRepository ordersRepository;
 
     @Autowired
     private EntityManager entityManager;
@@ -29,7 +29,7 @@ public class TestJpa {
     @BeforeEach
     void setUp() {
         for (int i = 0; i < 10; i++) {
-            Account account = new Account("charlie" + i, "pmy", 3).addOrder(new Order("productName" + i));
+            Account account = new Account("charlie" + i, "pmy", 3).addOrder(new Orders("productName" + i));
             Account savedAccount = accountRepository.save(account);
         }
     }
@@ -42,7 +42,7 @@ public class TestJpa {
         List<Account> accounts = accountRepository.findAll();
 
         List<String> collect = accounts.stream()
-                .map(account -> account.getOrder().get(0).getProduct())
+                .map(account -> account.getOrder().get(0).getProductName())
                 .collect(Collectors.toList());
 
         collect.forEach(System.out::println);
@@ -58,7 +58,7 @@ public class TestJpa {
         System.out.println("accounts size : " + accounts.size());
 
         List<String> collect = accounts.stream()
-                .map(account -> account.getOrder().get(0).getProduct())
+                .map(account -> account.getOrder().get(0).getProductName())
                 .collect(Collectors.toList());
 
         collect.forEach(System.out::println);
@@ -74,7 +74,7 @@ public class TestJpa {
         System.out.println("accounts size : " + accounts.size());
 
         List<String> collect = accounts.stream()
-                .map(account -> account.getOrder().get(0).getProduct())
+                .map(account -> account.getOrder().get(0).getProductName())
                 .collect(Collectors.toList());
 
         collect.forEach(System.out::println);
